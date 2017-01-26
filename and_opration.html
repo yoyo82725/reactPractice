@@ -1,0 +1,28 @@
+<html>
+<head>
+
+</head>
+<body>
+<script type="text/javascript" src="js/react.js" ></script>
+<script type="text/javascript" src="js/react-dom.js" ></script>
+<script type="text/javascript" src="js/browser.min.js"></script>
+<script type="text/babel">
+	function Message (props) {
+		return (
+			<div>
+				<h1>hello!</h1>
+				{ props.mail.length > 0 &&
+					<h1>you have {props.mail.length} unread messages</h1>
+				}
+			</div>
+		);
+	}
+
+	const mail = ['a','b','c'];
+	ReactDOM.render(
+		<Message mail={mail}/>,
+		document.querySelector('body')
+	);
+</script>
+</body>
+</html>

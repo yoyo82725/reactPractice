@@ -1,0 +1,40 @@
+<html>
+<head>
+
+</head>
+<body>
+<script type="text/javascript" src="js/react.js" ></script>
+<script type="text/javascript" src="js/react-dom.js" ></script>
+<script type="text/javascript" src="js/browser.min.js"></script>
+<script type="text/babel">
+	class Toggle extends React.Component {
+		constructor (props) {
+			super (props);
+			this.state = {
+				isToggleOn : true
+			};
+			
+			this.handleClick = this.handleClick.bind(this);
+		}
+		
+		handleClick () {
+			
+			this.setState((prevState) => ({
+				isToggleOn : !prevState.isToggleOn
+			}));
+		}
+		
+		render () {
+			return (
+				<button onClick={this.handleClick}>{this.state.isToggleOn.toString()}</button>
+			);
+		}
+	}
+	
+	ReactDOM.render (
+		<Toggle/>,
+		document.querySelector('body')
+	);
+</script>
+</body>
+</html>

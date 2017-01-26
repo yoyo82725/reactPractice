@@ -1,0 +1,22 @@
+<html>
+<head>
+
+</head>
+<body>
+<script type="text/javascript" src="js/react.js" ></script>
+<script type="text/javascript" src="js/react-dom.js" ></script>
+<script type="text/javascript" src="js/browser.min.js"></script>
+<script type="text/babel">
+	function Test(props) {
+		return <h1>hello! function! {props.name}</h1>;
+	}
+	
+	const element = <Test name="aa"/>;
+	
+	ReactDOM.render(
+		element,
+		document.querySelector("body")
+	);
+</script>
+</body>
+</html>

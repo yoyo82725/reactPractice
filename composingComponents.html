@@ -1,0 +1,27 @@
+<html>
+<head>
+
+</head>
+<body>
+<script type="text/javascript" src="js/react.js" ></script>
+<script type="text/javascript" src="js/react-dom.js" ></script>
+<script type="text/javascript" src="js/browser.min.js"></script>
+<script type="text/babel">
+	class Test extends React.Component {
+		render () {
+			return (
+				<div>
+					<h1>hello! composing!</h1>
+					<hr/>
+				</div>
+			);
+		}
+	}
+	
+	ReactDOM.render(
+		<Test/>,
+		document.querySelector("body")
+	);
+</script>
+</body>
+</html>

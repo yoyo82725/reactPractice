@@ -1,0 +1,64 @@
+<html>
+<head>
+
+</head>
+<body>
+<script type="text/javascript" src="js/react.js" ></script>
+<script type="text/javascript" src="js/react-dom.js" ></script>
+<script type="text/javascript" src="js/browser.min.js"></script>
+<script type="text/babel">
+	class Login extends React.Component {
+		constructor (props) {
+			super (props);
+			this.state = {
+				isLogin : false
+			};
+			this.handleClick = this.handleClick.bind(this);
+		}
+		
+		handleClick () {
+			this.setState(prevState => ({
+				isLogin : !prevState.isLogin
+			}));
+		}
+		
+		render () {
+			return (
+				<div>
+					<LoginState login={this.state.isLogin}/>
+					<LoginButton login={this.state.isLogin} onClick={this.handleClick}/>
+				</div>
+			);
+		}
+	}
+	
+	function LoginState (props) {
+		if (props.login) {
+			return (
+				<h1>AfterLogin</h1>
+			);
+		}
+		return (
+			<h1>BeforeLogin</h1>
+		);
+		
+	}
+	
+	function LoginButton (props) {
+		var str = "";
+		if (props.login)
+			str = "logOut";
+		else
+			str = "login";
+		return (
+			<button onClick={props.onClick}>{str}</button>
+		);
+	}
+	
+	ReactDOM.render (
+		<Login />,
+		document.querySelector('body')
+	);
+</script>
+</body>
+</html>
