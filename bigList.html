@@ -1,0 +1,109 @@
+<html>
+<head>
+
+</head>
+<body>
+<script type="text/javascript" src="js/react.js" ></script>
+<script type="text/javascript" src="js/react-dom.js" ></script>
+<script type="text/javascript" src="js/browser.min.js"></script>
+<script type="text/babel">
+
+var PRODUCTS = [
+  {category: 'Sporting Goods', price: '$49.99', stocked: true, name: 'Football'},
+  {category: 'Sporting Goods', price: '$9.99', stocked: true, name: 'Baseball'},
+  {category: 'Sporting Goods', price: '$29.99', stocked: false, name: 'Basketball'},
+  {category: 'Electronics', price: '$99.99', stocked: true, name: 'iPod Touch'},
+  {category: 'Electronics', price: '$399.99', stocked: false, name: 'iPhone 5'},
+  {category: 'Electronics', price: '$199.99', stocked: true, name: 'Nexus 7'}
+];
+
+function ObjectRow (props) {
+	let name = (props.obj.stocked)? props.obj.name : <span style={{color:'red'}}>{props.obj.name}</span>;
+	return (
+		<tr>
+		<td>
+			{name}
+		</td>
+		<td>{props.obj.price}</td>
+		</tr>
+	);
+}
+
+function ListContext (props) {
+	let nowCate = '';
+	let rows = [];
+	PRODUCTS.map(function(object, i){
+		// filter
+		if(object.name.toUpperCase().indexOf(props.textFilter) === -1 || (props.onlyStock && !object.stocked)){
+
+		}else{
+			if (nowCate != object.category) {
+				nowCate = object.category;
+				rows.push(<tr><td colspan="2">{object.category}</td></tr>);
+			}
+	        rows.push(<ObjectRow obj={object} key={i} />);
+		}
+    });
+	return (
+		<table>
+		<thead>
+			<tr>
+				<th>Name</th>
+				<th>Price</th>
+			</tr>
+		</thead>
+		<tbody>
+			{rows}
+		</tbody>
+		</table>
+	);
+}
+
+class List extends React.Component {
+	constructor(props) {
+		super(props);
+		this.handleTextChange = this.handleTextChange.bind(this);
+		this.handleBoxChange = this.handleBoxChange.bind(this);
+		this.state = {
+			textFilter : "",
+			onlyStock : false
+		};
+	}
+
+	handleTextChange (e) {
+		this.setState({
+			textFilter : e.target.value.toUpperCase()
+		});
+	}
+
+	handleBoxChange (e) {
+
+		this.setState({
+			onlyStock : e.target.checked
+		});
+	}
+
+	render(){
+		return (
+			<div>
+				<form>
+					<input type="text" placeholder="Search ..." onChange={this.handleTextChange}/>
+					<br/>
+					<input type="checkbox" onChange={this.handleBoxChange}/>
+					<label>
+						Only show products in stock
+					</label>
+				</form>
+				<ListContext textFilter={this.state.textFilter} onlyStock={this.state.onlyStock}/>
+			</div>
+		);
+	}
+}
+
+ReactDOM.render (
+	<List/>,
+	document.querySelector('body')
+);
+</script>
+</body>
+</html>
